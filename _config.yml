@@ -1,11 +1,11 @@
 # Site settings
-title: Hux Blog
-SEOTitle: 黄玄的博客 | Hux Blog
+title: Blank's Blog
+SEOTitle: Blank的博客 | Blank's Blog
 header-img: img/home-bg.jpg
 email: huxpro@gmail.com
-description: "关于程序与设计、黑客与画家 | 黄玄，Web & Mobile Lover，Software Engineer，UX Designer | 这里是 @Hux黄玄 的个人博客，与你一起发现更大的世界。"
-keyword: "黄玄, Hux黄玄, Hux, 鬼栈, huxpro, @huxpro, 黄玄的博客, Hux Blog, 博客, 个人网站, 互联网, Web, JavaScript, 前端, 设计"
-url: "https://huangxuan.me"              # your host, for absolute URL
+description: "Android开发工程师 | Android & Web Lover，Software Engineer | 这里是 @Blank 的个人博客，Find more，get more。"
+keyword: "Blank, @blank, Blank的博客, Blank Blog, 博客, 个人网站, 互联网, Android"
+url: "https://blankting.github.io"              # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
 
 # Publish posts or collection documents with a future date.
@@ -13,10 +13,10 @@ future: true
 
 # SNS settings
 RSS: false
-weibo_username:     huxpro
-zhihu_username:     huxpro
-github_username:    huxpro
-twitter_username:   huxpro
+zhihu_username:     blankting
+github_username:    blankting
+facebook_username:  tingblank
+csdn_username:      Blank557
 #facebook_username:  huxpro
 #linkedin_username:  firstname-lastname-idxxxx
 
@@ -59,7 +59,15 @@ kramdown:
 
 
 # Disqus settings
-disqus_username: hux
+#disqus_username: blankting
+gitalk:
+  enable: true    #是否开启Gitalk评论
+  clientID: 155e406932b585f1822e                            #生成的clientID
+  clientSecret: 928fac110bb00689d82ae6b36490ebac3c4c0ec4    #生成的clientSecret
+  repo: blankting.github.io    #仓库名称
+  owner: blankting    #github用户名
+  admin: blankting
+  distractionFreeMode: true #是否启用类似FB的阴影遮罩
 
 # Netease settings
 netease_comment: false
@@ -68,18 +76,18 @@ netease_comment: false
 
 # Analytics settings
 # Baidu Analytics 
-# ba_track_id: [your track id]
+ba_track_id: a60a085775c768e7be4d14857f406e8fd6b73466
 
 # Google Analytics
-ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
-ga_domain: huangxuan.me
+ga_track_id: 'UA-136297606-1'            # Format: UA-xxxxxx-xx
+ga_domain: auto               # 默认的是 auto, 这里我是自定义了的域名，你如果没有自己的域名，需要改成auto
 
 
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "For the next quantum leap<br>离开世界之前，一切都是过程"
-sidebar-avatar: /img/avatar-hux-ny.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
+sidebar-about-description: "No cross, no crown<br>生活有度"
+sidebar-avatar: /img/about-blank-ny.jpg     # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
 
@@ -103,37 +111,10 @@ page-mathjax: false
 # Friends
 friends: [
     {
-    #     title: "Su",
-    #     href: "http://su.gallery/"
-    # },{
-        title: "乱序",
-        href: "http://mida.re/"
+        title: "Android Developer",
+        href: "https://developer.android.google.cn"
     },{
-        title: "前端外刊评论",
-        href: "http://qianduan.guru/"
-    },{
-        title: "天镶的博客",
-        href: "http://lingyu.wang/"
-    },{
-        title: "Luke 的自留地",
-        href: "http://hmqk1995.github.io"
-    },{
-        title: "Ebn's Blog",
-        href: "http://ebnbin.com/"
-    },{
-        title: "SmdCn's Blog",
-        href: "http://blog.smdcn.net"
-    },{
-        title: "David's Game",
-        href: "https://www.ruoyaowu.com/"
-    },{
-        title: "DHong Say",
-        href: "http://dhong.co"
-    },{
-        title: "尹峰以为",
-        href: "http://ingf.github.io/"
-    },{
-        title: "解旻的博客",
-        href: "http://xieminis.me/"
+        title: "Android Docs",
+        href: "http://www.android-doc.com/reference/packages.html"
     }
 ]
