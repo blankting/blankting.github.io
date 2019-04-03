@@ -8,10 +8,9 @@ header-img: img/in-post/post-bg-android.jpg
 catalog: 	 true
 tags:
     - Android
-    - AudioTrack
-    - AudioFlinger
-    - AudioPolicyService
-    - AudioPolicyManager
+    - Framework
+    - MultiMedia
+    - Audio
 ---
 
 # Android Audio System Architecture introduction

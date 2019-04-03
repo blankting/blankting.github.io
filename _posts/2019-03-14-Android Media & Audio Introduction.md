@@ -8,10 +8,8 @@ header-img: img/in-post/post-bg-android.jpg
 catalog: 	 true
 tags:
     - Android
-    - MediaPlayer
-    - AudioTrack
-    - AudioRecord
-    - MediaSession
+    - APP
+    - MultiMedia
 ---
 
 # 音频相关介绍

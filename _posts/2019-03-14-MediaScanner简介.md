@@ -8,6 +8,8 @@ header-img: img/in-post/post-bg-android.jpg
 catalog: 	 true
 tags:
     - Android
+    - Framework
+    - MediaProvider
     - MediaScanner
 ---
 
