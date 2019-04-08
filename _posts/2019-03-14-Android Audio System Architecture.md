@@ -27,9 +27,15 @@ tags:
 
 ## Application层
 
+这是整个音频体系的最上层，因而并不是Android系统实现的重点。比如厂商根据特定需求自己写的一个音乐播放器，游戏中使用到声音，或者调节音频的一类软件等等。
+
 音频相关的应用软件有： 音乐播放器，FM Radio，电话，声音设置，视频播放器等等。
 
 ## Application Framework层
+
+相信大家可以马上想到MediaPlayer和MediaRecorder，因为这是我们在开发音频相关产品时使用最广泛的两个类。实际上，Android也提供了另两个相似功能的类，即AudioTrack和AudioRecorder，MediaPlayerService内部的实现就是通过它们来完成的,只不过MediaPlayer/MediaRecorder提供了更强大的控制功能，相比前者也更易于使用。我们后面还会有详细介绍。
+
+除此以外，Android系统还为我们控制音频系统提供了AudioManager、AudioService及AudioSystem类。这些都是framework为便利上层应用开发所设计的。
 
 该层代码位置frameworks/base/media/java/android/media。其中关键类的作用如下：
 
@@ -41,6 +47,22 @@ AudioManager、AudioService及AudioSystem等类提供声音控制、通道选择
 Audio的JNI代码在framewoks/base/core/jni目录下面，会和其他一些系统文件生成libandroid_runtime.so供上层调用。
 
 ## Native Framework层
+
+我们知道，framework层的很多类，实际上只是应用程序使用Android库文件的“中介”而已。因为上层应用采用java语言编写，它们需要最直接的java接口的支持，这就是framework层存在的意义之一。而作为“中介”，它们并不会真正去实现具体的功能，或者只实现其中的一部分功能，而把主要重心放在库中来完成。比如上面的AudioTrack、AudioRecorder、MediaPlayer和MediaRecorder等等在库中都能找到相对应的类。
+
+这一部分代码集中放置在工程的frameworks/av/media/libmedia中，多数是C++语言编写的。
+
+除了上面的类库实现外，音频系统还需要一个“核心中控”，或者用Android中通用的实现来讲，需要一个系统服务(比如ServiceManager、LocationManagerService、ActivityManagerService等等)，这就是AudioFlinger和AudioPolicyService。它们的代码放置在frameworks/av/services/audioflinger，生成的最主要的库叫做libaudioflinger。
+
+音频体系中另一个重要的系统服务是MediaPlayerService，它的位置在frameworks/av/media/libmediaplayerservice。
+
+因为涉及到的库和相关类是非常多的，建议大家在理解的时候分为两条线索。
+
+其一，以库为线索。比如AudioPolicyService和AudioFlinger都是在libaudioflinger库中;而AudioTrack、AudioRecorder等一系列实现则在libmedia库中。
+
+其二，以进程为线索。库并不代表一个进程，进程则依赖于库来运行。虽然有的类是在同一个库中实现的，但并不代表它们会在同一个进程中被调用。比如AudioFlinger和AudioPolicyService都驻留于名为mediaserver的系统进程中;而AudioTrack/AudioRecorder和MediaPlayer/MediaRecorder一样实际上只是应用进程的一部分，它们通过binder服务来与其它系统进程通信。
+
+在分析源码的过程中，一定要紧抓这两条线索，才不至于觉得混乱。
 
 ### 客户端： 
        AudioTrack、AudioRecorder、MediaPlayer、MediaRecorder、AudioSystem对应Java层的相关类，代码放置在frameworks/av/media/libmedia中， C++语言编写，编译后成为libmedia库。
@@ -1081,7 +1103,13 @@ status_t AudioPolicyManager::handleDeviceConfigChange(audio_devices_t device,
 
 ## HAL层
 
-HAL是AudioFlinger向下访问的对象，厂商会在这一层实现自己的接口层，桥接硬件驱动和上层框架，形成的文件会编译成audio.primary.,audio.a2dp.等so库文件供音频模块加载。
+从设计上来看，硬件抽象层是AudioFlinger直接访问的对象。这说明了两个问题，一方面AudioFlinger并不直接调用底层的驱动程序;另一方面，AudioFlinger上层(包括和它同一层的MediaPlayerService)的模块只需要与它进行交互就可以实现音频相关的功能了。因而我们可以认为AudioFlinger是Android音频系统中真正的“隔离板”，无论下面如何变化，上层的实现都可以保持兼容。
+
+音频方面的硬件抽象层主要分为两部分，即AudioFlinger和AudioPolicyService。实际上后者并不是一个真实的设备，只是采用虚拟设备的方式来让厂商可以方便地定制出自己的策略。
+
+抽象层的任务是将AudioFlinger/AudioPolicyService真正地与硬件设备关联起来，但又必须提供灵活的结构来应对变化——特别是对于Android这个更新相当频繁的系统。比如以前Android系统中的Audio系统依赖于ALSA-lib，但后期就变为了tinyalsa，这样的转变不应该对上层造成破坏。因而Audio HAL提供了统一的接口来定义它与AudioFlinger/AudioPolicyService之间的通信方式，这就是audio_hw_device、audio_stream_in及audio_stream_out等等存在的目的，这些Struct数据类型内部大多只是函数指针的定义，是一些“壳”。当AudioFlinger/AudioPolicyService初始化时，它们会去寻找系统中最匹配的实现(这些实现驻留在以audio.primary.*,audio.a2dp.*为名的各种库中)来填充这些“壳”。
+
+根据产品的不同，音频设备存在很大差异，在Android的音频架构中，这些问题都是由HAL层的audio.primary等等库来解决的，而不需要大规模地修改上层实现。换句话说，厂商在定制时的重点就是如何提供这部分库的高效实现了。
 
 ## 驱动
 
