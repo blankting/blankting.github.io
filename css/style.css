@@ -234,7 +234,7 @@ li div {
     overflow: hidden
 }
 
-.time_container {
+._container {
     position: relative
 }
 
@@ -264,8 +264,8 @@ li div {
 }
 
 .time {
-    font-size: 10rem;
-    line-height: 10rem;
+    font-size: 12rem;
+    line-height: 12rem;
     font-weight: normal;
     text-align: center
 }
