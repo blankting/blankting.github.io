@@ -79,6 +79,10 @@ function getTimezoneOffset() { var xhr = createXHR();
             clock() } };
     xhr.send(null) }
 
+function setLunarDate() {
+
+}
+
 function clock(autoMode) {
     var date = new Date();
     var utc8DiffMinutes = date.getTimezoneOffset() + timezoneOffset;
@@ -116,15 +120,11 @@ function clock(autoMode) {
             document.getElementById("lunar_date").innerHTML = lunar_date_data.ganzhi_year + "年" + lunar_date_data.lunar_month_chinese + lunar_date_data.lunar_day_chinese;
         } };
     xhr.send(null);
-
-    var LMM = date.getMonth() + 1;
-    var Ldd = date.getDate();    
-    var lunarDateString = MM + "月" + dd + "日";
+  
     var weekList = ["日", "一", "二", "三", "四", "五", "六"];
     var weekString = "星期" + weekList[day];
     document.getElementById("time").innerHTML = timeString;
     document.getElementById("date").innerHTML = dateString + " " + weekString
-    document.getElementById("lunar_date").innerHTML = lunarDateString
 }
 
 function weather() { console.log("weather update"); var xhr = createXHR();
