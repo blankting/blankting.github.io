@@ -134,7 +134,7 @@ function weather() { console.log("weather update"); var xhr = createXHR();
                 air = air ? air : "未知"; var airLevel = weather_data.aqi.air_level;
                 airLevel = airLevel && air ? airLevel : ""; var updateTime = weather_data.update_time.split(" ");
                 //updateTime = updateTime[updateTime.length - 1]; var weaInfo = "<div>最高/低气温：" + highTemp + "/" + lowTemp + "&#8451;</div>" + "<div>湿度：" + weather_data.humidity + "</div>" + "<div>空气质量：" + air + airLevel + "</div>" + "<div>风向：" + weather_data.wind + "</div>" + "<div>风速：" + weather_data.wind_speed + " " + weather_data.wind_scale + "</div>" + "<div>更新时间：" + updateTime + "</div>";
-                updateTime = updateTime[updateTime.length - 1]; var weaInfo = "<div>最高/低气温：" + highTemp + "/" + lowTemp + "&#8451;</div>" + "<div>湿度：" + weather_data.humidity + "</div>" + "<div>风向：" + weather_data.wind + "</div>" + "<div>风速：" + weather_data.wind_speed + " " + weather_data.wind_scale + "</div>" + "<div>更新时间：" + updateTime + "</div>";
+                updateTime = updateTime[updateTime.length - 1]; var weaInfo = "<div>最高/低气温：" + highTemp + "/" + lowTemp + "&#8451;</div>" + "<div>湿度：" + weather_data.humidity + "</div>" + "<div>风力：" + weather_data.wind  + weather_data.wind_speed + " " + weather_data.wind_scale + "</div>" + "<div>日出:" + weather_data.sunrise  + " 日落:" + weather_data.sunset + "</div>" + "<div>更新时间：" + updateTime + "</div>";
                 document.getElementById("weaTitle").innerHTML = weather_data.city + "当前天气";
                 document.getElementById("weaImg").innerHTML = weaImg;
                 document.getElementById("weaTemp").innerHTML = weaTemp;
