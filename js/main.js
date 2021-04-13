@@ -109,6 +109,10 @@ function clock(autoMode) {
     var timeString = hour + ":" + ("0" + minutes).slice(-2);
     var dateString = MM + "月" + dd + "日";
 
+    var weekList = ["日", "一", "二", "三", "四", "五", "六"];
+    var weekString = "星期" + weekList[day];
+    document.getElementById("time").innerHTML = timeString;
+    document.getElementById("date").innerHTML = dateString + " " + weekString
     var xhr = createXHR();
     xhr.open("GET", "https://v1.alapi.cn/api/lunar", true);
     xhr.onreadystatechange = function() { 
@@ -120,11 +124,6 @@ function clock(autoMode) {
             document.getElementById("lunar_date").innerHTML = lunar_date_data.ganzhi_year + "年" + lunar_date_data.lunar_month_chinese + lunar_date_data.lunar_day_chinese;
         } };
     xhr.send(null);
-  
-    var weekList = ["日", "一", "二", "三", "四", "五", "六"];
-    var weekString = "星期" + weekList[day];
-    document.getElementById("time").innerHTML = timeString;
-    document.getElementById("date").innerHTML = dateString + " " + weekString
 }
 
 function weather() { console.log("weather update"); var xhr = createXHR();
